@@ -62,15 +62,25 @@ $result_attendance_records = $conn->query($sql_attendance_records);
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Volunteer Dashboard</title>
     <link rel="stylesheet" href="css/volunteer_dashboard.css">
+    <link rel="stylesheet" href="css/mentor_dashboard.css">
 </head>
+
 <body>
     <!-- Profile Section -->
-    <div class="dashboard-container-profile">
+    <nav class="headof">
+        <div><img src="./css/CHRIST LOGO.png" />
+            <h1> Welcome, <?php echo htmlspecialchars($row['volunteer_name']); ?>!</h1>
+        </div>
+
+        <a href="logout.php">Logout</a>
+    </nav>
+    <div class="dashboard-container">
         <h1>Volunteer Profile</h1>
         <p><strong>Name:</strong> <?php echo htmlspecialchars($row['volunteer_name']); ?></p>
         <p><strong>Email:</strong> <?php echo htmlspecialchars($row['email']); ?></p>
@@ -91,10 +101,10 @@ $result_attendance_records = $conn->query($sql_attendance_records);
                     <th>Status</th>
                 </tr>
                 <?php while ($attendanceRow = $result_attendance_records->fetch_assoc()): ?>
-                <tr>
-                    <td><?php echo htmlspecialchars($attendanceRow['date']); ?></td>
-                    <td><?php echo htmlspecialchars($attendanceRow['status']); ?></td>
-                </tr>
+                    <tr>
+                        <td><?php echo htmlspecialchars($attendanceRow['date']); ?></td>
+                        <td><?php echo htmlspecialchars($attendanceRow['status']); ?></td>
+                    </tr>
                 <?php endwhile; ?>
             </table>
             <h3>Total Days Present: <?php echo htmlspecialchars($presentDays); ?></h3>
@@ -103,5 +113,11 @@ $result_attendance_records = $conn->query($sql_attendance_records);
             <p>No events attended yet.</p>
         <?php endif; ?>
     </div>
+
+    <footer>
+        <p>&copy; <?php echo date("Y"); ?> Build By MSC AIML </p>
+    </footer>
+
 </body>
+
 </html>
