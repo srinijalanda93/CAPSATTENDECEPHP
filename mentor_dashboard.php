@@ -17,7 +17,7 @@ if ($row = $result->fetch_assoc()) {
     $mentorPhone = $row['phone_number'];
     $mentorWingId = $row['wing_id'];
     $mentorDateOfJoining = $row['date_of_joining'];
-    
+
     // Fetch wing name
     $sqlWing = "SELECT wing_name FROM wing WHERE wing_id='$mentorWingId'";
     $resultWing = $conn->query($sqlWing);
@@ -60,17 +60,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['delete_volunteer'])) {
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mentor Dashboard</title>
-    <link rel="stylesheet" href="css/mentor_dashboard.css">
+    <link rel="stylesheet" href="./css/mentor_dashboard.css">
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             // Fetch messages from PHP variables
             const updateMessage = "<?php echo addslashes($updateMessage); ?>";
             const deleteMessage = "<?php echo addslashes($deleteMessage); ?>";
-            
+
             // Display messages
             if (updateMessage) {
                 alert(updateMessage);
@@ -115,44 +116,68 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['delete_volunteer'])) {
         }
     </script>
 </head>
+
 <body>
-    <div class="dashboard-container">
-        <div class="profile-section">
-            <h1>Hi, <?php echo htmlspecialchars($mentorName); ?>!</h1>
-            <div class="profile-info">
-                <p><strong>Name:</strong> <?php echo htmlspecialchars($mentorName); ?></p>
-                <p><strong>Email:</strong> <?php echo htmlspecialchars($mentorEmail); ?></p>
-                <p><strong>Phone:</strong> <?php echo htmlspecialchars($mentorPhone); ?></p>
-                <p><strong>Wing:</strong> <?php echo htmlspecialchars($wingName); ?></p>
-                <p><strong>Date of Joining:</strong> <?php echo htmlspecialchars($mentorDateOfJoining); ?></p>
-            </div>
+    <nav class="headof">
+        <div><img src="./css/CHRIST LOGO.png" />
+            <h1> Welcome, <?php echo htmlspecialchars($mentorName); ?>!</h1>
         </div>
 
-        <div class="update-section">
+        <a href="logout.php">Logout</a>
+    </nav>
+    <section class='BodyTop'>
+        <div class="dashboard-container">
+            <div class="profile-section">
+                <h2>Profile Details</h2>
+                <div class="position-info">
+                    <h3>Position:</h3>
+                    <span>Mentor</span>
+                </div>
+                <div class="profile-info">
+                    <p><strong>Name:</strong> <?php echo htmlspecialchars($mentorName); ?></p>
+                    <p><strong>Email:</strong> <?php echo htmlspecialchars($mentorEmail); ?></p>
+                    <p><strong>Phone:</strong> <?php echo htmlspecialchars($mentorPhone); ?></p>
+                    <p><strong>Wing:</strong> <?php echo htmlspecialchars($wingName); ?></p>
+                    <p><strong>Date of Joining:</strong> <?php echo htmlspecialchars($mentorDateOfJoining); ?></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="sep">
+        <div class="update-section section">
             <h2>Update Attendance</h2>
             <form name="attendanceForm" method="POST" onsubmit="return validateAttendanceForm()">
                 <label for="volunteer_id">Volunteer ID:</label>
-                <input type="number" id="volunteer_id" name="volunteer_id" required><br>
-                
+                <input type="number" id="volunteer_id" name="volunteer_id" required>
+
                 <label for="status">Status:</label>
-                <input type="text" id="status" name="status" required><br>
-                
+                <input type="text" id="status" name="status" required>
+
                 <label for="date">Date:</label>
-                <input type="date" id="date" name="date" required><br>
-                
+                <input type="date" id="date" name="date" required>
+
                 <input type="submit" name="update_attendance" value="Update Attendance">
             </form>
         </div>
 
-        <div class="delete-section">
+
+
+        <div class="delete-section section">
             <h2>Delete Volunteer</h2>
             <form name="deleteForm" method="POST" onsubmit="return validateDeleteForm()">
                 <label for="volunteer_id">Volunteer ID:</label>
-                <input type="number" id="volunteer_id" name="volunteer_id" required><br>
-                
+                <input type="number" id="volunteer_id" name="volunteer_id" required>
                 <input type="submit" name="delete_volunteer" value="Delete Volunteer">
             </form>
         </div>
-    </div>
+
+    </section>
+
+    <footer>
+        <p>&copy; <?php echo date("Y"); ?> Build By MSC AIML </p>
+    </footer>
 </body>
+
+
 </html>

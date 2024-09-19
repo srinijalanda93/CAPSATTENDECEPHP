@@ -5,7 +5,14 @@ body {
   padding: 0;
   min-height: 100vh;
 }
-
+#head>div>img{
+  width:10%;
+  height: 3%;
+}
+#head>div{
+  display: flex;
+  align-items: center;
+}
 #head {
   position: sticky;
   top: 0;

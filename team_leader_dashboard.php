@@ -87,7 +87,10 @@ $volunteerResult = $conn->query($volunteerSql);
 
 <body>
     <nav id='head'>
-        <h1>Welcome, <?php echo htmlspecialchars($teamLeaderName); ?>!</h1>
+        <div><img src="./css/CHRIST LOGO.png" />
+            <h1> Welcome, <?php echo htmlspecialchars($teamLeaderName); ?>!</h1>
+        </div>
+
         <a href="logout.php">Logout</a>
     </nav>
 
