@@ -1,80 +1,81 @@
 body {
-    font-family: Arial, sans-serif;
-    background: linear-gradient(45deg, #D3F0F6, #123880);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-
+  font-family: Arial, sans-serif;
+  background: linear-gradient(45deg, #d3f0f6, #123880);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 }
-#upper>img{
-width:100%;
+#upper > img {
+  width: 100%;
 }
-#combine{
-    width:70vw;
-    display:flex;
-    /* flex-direction: column; */
-    justify-content: space-around;
-    align-items: center;
-    box-sizing: border-box;
+#combine {
+  width: 70vw;
+  display: flex;
+  /* flex-direction: column; */
+  justify-content: space-around;
+  align-items: center;
+  box-sizing: border-box;
 }
 .login-container {
-    background-color: #fff;
-    padding-inline: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 50%;
+  background-color: #fff;
+  padding-inline: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 50%;
 }
 h2 {
-    text-align: center;
-    color: #333;
+  text-align: center;
+  color: #333;
 }
-form{
-    display:flex;
-    align-items: center;
-    flex-direction: column;
-    padding-inline: 10px;
-    width: 100%;
+form {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding-inline: 10px;
+  width: 100%;
 }
-input[type="email"], input[type="password"], input[type="submit"] {
-    width: 90%;
-    padding: 9px;
-    margin: 10px 0;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+input[type="email"],
+input[type="password"],
+input[type="submit"] {
+  width: 90%;
+  padding: 9px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
 }
 input[type="submit"] {
-    background-color: #28a745;
-    color: white;
-    cursor: pointer;
-    border: none;
+  background-color: #28a745;
+  color: white;
+  cursor: pointer;
+  border: none;
 }
 input[type="submit"]:hover {
-    background-color: #218838;
+  background-color: #218838;
 }
 .error {
-    color: red;
-    font-size: 14px;
+  color: red;
+  font-size: 14px;
 }
-#capintro{
-    margin-inline: 5%;
-    width:50%;
+#capintro {
+  margin-inline: 5%;
+  width: 50%;
 }
-#capintro>img{
-    width:90%;
-    height:70%;
+#capintro > img {
+  width: 90%;
+  height: 70%;
 }
-#capintro >p{
-    align-items: center;
-    text-align: justify;
-    font-size: 17px;
-    font-style: italic;
-    font-weight: 600;
-    color: #333;
+#capintro > p {
+  align-items: center;
+  text-align: justify;
+  font-size: 17px;
+  font-style: italic;
+  font-weight: 600;
+  color: #333;
 }
-#lower>h2{
-    margin: 0px !important;
-    text-align: center;
-    color: #161515;
+#lower > h2 {
+  margin: 0px !important;
+  text-align: center;
+  color: #161515;
 }
