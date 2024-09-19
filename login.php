@@ -79,8 +79,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </script>
 </head>
 <body>
-
-<div class="login-container">
+    <section id="upper">
+    <img src="./css/loginimage.png" alt="upperimage" srcset="">
+    </section>
+   <section id="lower">
+   <h2>Welcome to CAPS </h2>
+   <div id="combine">
+    <div class="login-container">
     <h2>Login</h2>
 
     <!-- PHP error message -->
@@ -95,6 +100,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <input type="submit" value="Login">
     </form>
 </div>
+
+<div id="capintro">
+<!-- <img src="./css/CAPS LOGO.png" alt="logo"> -->
+<p>CAPS, or the Centre for Academic and Professional Support,
+     is designed for students, educators, and professionals
+      within the CHRIST community who are eager to enhance their
+       academic, scholarly, and professional skills. Whether you’re 
+       a student striving to excel in your studies, a researcher looking
+        to master advanced writing techniques, or someone seeking guidance
+         on professional communication, CAPS is your go-to resource. 
+         Our services cater to a wide range of needs through various modalities,
+          including peer training, one-on-one coaching, e-learning modules, 
+          and psychometric assessments. </p>
+</div>
+    </div>
+
+   </section>
+    
+
+
 
 </body>
 </html>
