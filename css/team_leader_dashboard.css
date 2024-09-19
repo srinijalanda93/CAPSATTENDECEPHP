@@ -14,12 +14,12 @@ body {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.section {
-    margin-bottom: 30px;
-    padding: 20px;
-    background-color: #fff;
-    border: 1px solid #ddd;
-    border-radius: 6px;
+.profile-section, .form-section {
+    margin-bottom: 20px;
+}
+
+.profile-info p {
+    font-size: 16px;
 }
 
 h1, h2 {

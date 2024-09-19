@@ -1,0 +1,48 @@
+/* Style for the overall layout */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 20px;
+}
+
+/* Profile Section */
+.dashboard-container-profile {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.dashboard-container-profile h1 {
+    margin-bottom: 15px;
+}
+
+/* Attendance Section */
+.dashboard-container-attendance {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.dashboard-container-attendance h2 {
+    margin-bottom: 15px;
+}
+
+/* Table Style */
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table, th, td {
+    border: 1px solid black;
+    padding: 10px;
+    text-align: left;
+}
+
+h3 {
+    margin-top: 15px;
+}
