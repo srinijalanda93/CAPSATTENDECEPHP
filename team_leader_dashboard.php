@@ -2,7 +2,6 @@
 include 'db_connect.php';
 session_start();
 
-
 $email = $_SESSION['email'];
 
 // Fetch team leader profile and wing name
@@ -29,13 +28,33 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['add_volunteer'])) {
     $phone = $_POST['phone'];
     $date_of_joining = $_POST['date_of_joining'];
 
-    $sql = "INSERT INTO volunteer (volunteer_id, name, email, phone_number, team_leader_id, date_of_joining)
-            VALUES ('$volunteer_id', '$name', '$volunteer_email', '$phone', 
-            (SELECT team_leader_id FROM team_leader WHERE email='$email'), '$date_of_joining')";
-    if ($conn->query($sql) === TRUE) {
-        $addVolunteerMessage = "Volunteer added successfully!";
+    // Check if the volunteer ID already exists
+    $checkSql = "SELECT volunteer_id FROM volunteer WHERE volunteer_id = '$volunteer_id'";
+    $checkResult = $conn->query($checkSql);
+
+    if ($checkResult->num_rows > 0) {
+        $addVolunteerMessage = "Error: Volunteer ID already exists.";
     } else {
-        $addVolunteerMessage = "Error: " . $conn->error;
+        $sql = "INSERT INTO volunteer (volunteer_id, name, email, phone_number, team_leader_id, date_of_joining)
+                VALUES ('$volunteer_id', '$name', '$volunteer_email', '$phone', 
+                (SELECT team_leader_id FROM team_leader WHERE email='$email'), '$date_of_joining')";
+        if ($conn->query($sql) === TRUE) {
+            $addVolunteerMessage = "Volunteer added successfully!";
+        } else {
+            $addVolunteerMessage = "Error: " . $conn->error;
+        }
+    }
+}
+
+// Deleting volunteer
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['delete_volunteer'])) {
+    $volunteer_id_delete = $_POST['volunteer_id_delete'];
+
+    $deleteSql = "DELETE FROM volunteer WHERE volunteer_id = '$volunteer_id_delete'";
+    if ($conn->query($deleteSql) === TRUE) {
+        $deleteVolunteerMessage = "Volunteer deleted successfully!";
+    } else {
+        $deleteVolunteerMessage = "Error deleting volunteer: " . $conn->error;
     }
 }
 
@@ -56,10 +75,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['mark_attendance'])) {
     }
 }
 
+// Fetch volunteers for "Delete Volunteer" form
+$volunteerSqlDelete = "SELECT * FROM volunteer WHERE team_leader_id = (SELECT team_leader_id FROM team_leader WHERE email='$email')";
+$volunteerResultDelete = $conn->query($volunteerSqlDelete);
 
-// Fetch all volunteers under the team leader
-$volunteerSql = "SELECT * FROM volunteer WHERE team_leader_id = (SELECT team_leader_id FROM team_leader WHERE email='$email')";
-$volunteerResult = $conn->query($volunteerSql);
+// Fetch volunteers for "Mark Attendance" form
+$volunteerSqlAttendance = "SELECT * FROM volunteer WHERE team_leader_id = (SELECT team_leader_id FROM team_leader WHERE email='$email')";
+$volunteerResultAttendance = $conn->query($volunteerSqlAttendance);
 ?>
 
 <!DOCTYPE html>
@@ -77,6 +99,11 @@ $volunteerResult = $conn->query($volunteerSql);
                 alert(addVolunteerMessage);
             }
 
+            const deleteVolunteerMessage = "<?php echo isset($deleteVolunteerMessage) ? addslashes($deleteVolunteerMessage) : ''; ?>";
+            if (deleteVolunteerMessage) {
+                alert(deleteVolunteerMessage);
+            }
+
             const attendanceMessage = "<?php echo isset($attendanceMessage) ? addslashes($attendanceMessage) : ''; ?>";
             if (attendanceMessage) {
                 alert(attendanceMessage);
@@ -90,7 +117,6 @@ $volunteerResult = $conn->query($volunteerSql);
         <div><img src="./css/CHRIST LOGO.png" />
             <h1> Welcome, <?php echo htmlspecialchars($teamLeaderName); ?>!</h1>
         </div>
-
         <a href="logout.php">Logout</a>
     </nav>
 
@@ -140,7 +166,7 @@ $volunteerResult = $conn->query($volunteerSql);
                 <label for="volunteer_id_delete">Select Volunteer to Delete:</label>
                 <select id="volunteer_id_delete" name="volunteer_id_delete" required>
                     <!-- Populate this select with volunteers -->
-                    <?php while ($volunteerRow = $volunteerResult->fetch_assoc()): ?>
+                    <?php while ($volunteerRow = $volunteerResultDelete->fetch_assoc()): ?>
                         <option value="<?php echo $volunteerRow['volunteer_id']; ?>">
                             <?php echo $volunteerRow['name']; ?>
                         </option>
@@ -152,11 +178,11 @@ $volunteerResult = $conn->query($volunteerSql);
 
         <div class="section-container">
             <h2>Take Attendance</h2>
-            <?php if ($volunteerResult->num_rows > 0): ?>
+            <?php if ($volunteerResultAttendance->num_rows > 0): ?>
                 <form method="POST">
                     <label for="volunteer_id">Select Volunteer:</label>
                     <select id="volunteer_id" name="volunteer_id" required>
-                        <?php while ($volunteerRow = $volunteerResult->fetch_assoc()): ?>
+                        <?php while ($volunteerRow = $volunteerResultAttendance->fetch_assoc()): ?>
                             <option value="<?php echo $volunteerRow['volunteer_id']; ?>">
                                 <?php echo $volunteerRow['name']; ?>
                             </option>
@@ -167,19 +193,13 @@ $volunteerResult = $conn->query($volunteerSql);
                         <option value="Present">Present</option>
                         <option value="Absent">Absent</option>
                     </select>
-                    <input type="submit" name="mark_attendance" value="Mark Attendance">
+                    <input type="submit" name="mark_attendance" value="Submit">
                 </form>
             <?php else: ?>
-                <p>No volunteers found. Please add a volunteer first.</p>
+                <p>No volunteers available for attendance.</p>
             <?php endif; ?>
         </div>
     </section>
-
-    <footer>
-        <p>&copy; <?php echo date("Y"); ?> Build By MSC AIML </p>
-    </footer>
-
-
 </body>
 
 </html>

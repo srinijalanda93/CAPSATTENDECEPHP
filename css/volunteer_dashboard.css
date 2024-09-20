@@ -21,12 +21,13 @@ body {
 
 /* Attendance Section */
 .dashboard-container-attendance {
-  margin-top: 10px;
+  /* margin-top: 10px; */
   background-color: #fff;
   border: 1px solid #ddd;
   padding: 20px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   width: 60vw;
+  margin:auto !important;
 }
 
 .dashboard-container-attendance h2 {

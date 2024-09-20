@@ -69,6 +69,8 @@ $result_attendance_records = $conn->query($sql_attendance_records);
     <title>Volunteer Dashboard</title>
     <link rel="stylesheet" href="css/volunteer_dashboard.css">
     <link rel="stylesheet" href="css/mentor_dashboard.css">
+    <!-- Include Chart.js from CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
 <body>
@@ -112,12 +114,60 @@ $result_attendance_records = $conn->query($sql_attendance_records);
         <?php else: ?>
             <p>No events attended yet.</p>
         <?php endif; ?>
+         <!-- Add Canvas for Chart.js -->
+         <h2>Attendance Chart</h2>
+        <canvas id="attendanceChart" width="400" height="400"></canvas>
     </div>
+<!-- Chart.js Script to generate the chart -->
+<script>
+        // Prepare data for the chart
+        const presentDays = <?php echo $presentDays; ?>;
+        const absentDays = <?php echo $absentDays; ?>;
 
+        // Generate Pie Chart using Chart.js
+        const ctx = document.getElementById('attendanceChart').getContext('2d');
+        const attendanceChart = new Chart(ctx, {
+            type: 'pie', // You can change this to 'bar' for a bar chart
+            data: {
+                labels: ['Present Days', 'Absent Days'],
+                datasets: [{
+                    label: 'Attendance',
+                    data: [presentDays, absentDays],
+                    backgroundColor: [
+                        'rgba(75, 192, 192, 0.2)', // Light Green for Present
+                        'rgba(255, 99, 132, 0.2)'  // Light Red for Absent
+                    ],
+                    borderColor: [
+                        'rgba(75, 192, 192, 1)', // Dark Green for Present
+                        'rgba(255, 99, 132, 1)'  // Dark Red for Absent
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                let label = context.label || '';
+                                if (label) {
+                                    label += ': ';
+                                }
+                                label += Math.round(context.raw * 100) / 100;
+                                return label + ' days';
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    </script>
     <footer>
         <p>&copy; <?php echo date("Y"); ?> Build By MSC AIML </p>
     </footer>
 
 </body>
-
-</html>
