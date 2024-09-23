@@ -1,10 +1,21 @@
 /* Style for the overall layout */
-body {
-  font-family: Arial, sans-serif;
-  background-color: #f4f4f4;
+#vin {
+  display: flex;
+  justify-content: center; 
+  align-items: center; 
+  height: 100vh;
   margin: 0;
-  padding: 20px;
 }
+
+.dashboard-container-attendance {
+  width: 60%; /* Set a width */
+  margin: 0 auto; 
+  padding: 20px; /* Adds spacing */
+  background-color: #f0f0f0; /* Optional: Add background */
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Optional: Add shadow for better look */
+  text-align: center; /* Centers text inside the div */
+}
+
 
 /* Profile Section */
 /* .dashboard-container-profile {
@@ -20,15 +31,15 @@ body {
 }
 
 /* Attendance Section */
-.dashboard-container-attendance {
-  /* margin-top: 10px; */
+/* .dashboard-container-attendance {
+   margin-top: 10px; 
   background-color: #fff;
   border: 1px solid #ddd;
   padding: 20px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   width: 60vw;
   margin:auto !important;
-}
+} */
 
 .dashboard-container-attendance h2 {
   margin-bottom: 15px;
